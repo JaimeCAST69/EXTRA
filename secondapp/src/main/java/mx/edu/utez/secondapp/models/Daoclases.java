@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Daoclases implements DaoRepository{
+public class Daoclases implements DaoRepository {
     private Connection conn;
     private PreparedStatement pstm;
     private ResultSet rs;
     private CallableStatement cs;
+
     @Override
     public List<clases> findAll() {
         List<clases> clases = new ArrayList<>();
@@ -21,8 +22,8 @@ public class Daoclases implements DaoRepository{
             String query = "SELECT * from clases;";
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
-            while (rs.next()){
-                clases clase1 = new clases();
+            while (rs.next()) {
+                clases clase1 = new clases(nombre, descripcion, "ACTIVO");
                 clase1.setId(rs.getLong("id"));
                 clase1.setNombre(rs.getString("nombre"));
                 clase1.setEstado(rs.getString("estado"));
@@ -30,9 +31,9 @@ public class Daoclases implements DaoRepository{
                 clase1.setIdinstructor(rs.getInt("idinstructor"));
                 clases.add(clase1);
             }
-        }catch (SQLException e){
-            Logger.getLogger(Daoclases.class.getName()).log(Level.SEVERE, "Error findAll"+e.getMessage());
-        }finally {
+        } catch (SQLException e) {
+            Logger.getLogger(Daoclases.class.getName()).log(Level.SEVERE, "Error findAll" + e.getMessage());
+        } finally {
             close();
         }
         return clases;
@@ -44,9 +45,29 @@ public class Daoclases implements DaoRepository{
     }
 
     @Override
+    public boolean save(String nombre, String descripcion, long idinstrutor) {
+        try {
+            conn = new MySQLConnection().connect();
+            String query = "INSERT INTO clases (nombre, descripcion, estado, idinstructor) VALUES (?, ?, 'ACTIVA', ?)";
+            pstm = conn.prepareStatement(query);
+            pstm.setString(1, nombre);
+            pstm.setString(2, descripcion);
+            pstm.setLong(3, idinstrutor);
+            return pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            Logger.getLogger(Daoclases.class.getName()).log(Level.SEVERE, "Error saveC: " + e.getMessage());
+        } finally {
+            close();
+        }
+        return false;
+    }
+
+
+    @Override
     public boolean delete(Long id) {
         return false;
     }
+
     public void close() {
         try {
             if (conn != null) conn.close();

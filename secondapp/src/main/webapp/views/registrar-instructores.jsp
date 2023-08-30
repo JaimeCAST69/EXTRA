@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>Registro de Instructor</h1>
-<form action="/user/registrar-instructores"" method="post">
+<form action="/user/registrar-instructores" method="post">
     <label for="usuario">Usuario:</label>
     <input type="text" id="usuario" name="usuario" required><br><br>
 

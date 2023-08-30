@@ -121,6 +121,11 @@ public class DaoUser implements DaoRepository<User> {
     }
 
     @Override
+    public boolean save(String nombre, String descripcion, long idinstrutor) {
+        return false;
+    }
+
+    @Override
     public boolean delete(Long id) {
         return false;
     }

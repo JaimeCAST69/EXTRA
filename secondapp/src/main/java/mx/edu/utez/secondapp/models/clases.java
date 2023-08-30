@@ -1,7 +1,5 @@
 package mx.edu.utez.secondapp.models;
 
-import com.sun.jdi.PrimitiveValue;
-
 public class clases {
     private long id;
     private String nombre;
@@ -9,7 +7,7 @@ public class clases {
     private String descripcion;
     private long idinstructor;
 
-    public clases() {
+    public clases(String nombre, String descripcion, String activo) {
     }
 
     public clases(long id, String nombre, String estado, String descripcion, long idinstructor) {

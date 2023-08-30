@@ -12,5 +12,8 @@
 </head>
 <body>
 
+<form action="/api/auth/logout">
+    <button class="alert-primary" >Salir</button>
+
 </body>
 </html>
