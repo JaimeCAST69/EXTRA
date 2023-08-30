@@ -27,7 +27,8 @@ import java.util.List;
                 "/user/instructor",
                 "/user/user",
                 "/user/registrar",
-                "/user/registrar-instructores"
+                "/user/registrar-instructores",
+                "/user/registrar-clases"
         })
 public class ServletUser extends HttpServlet {
     String action, redirect = "/api/user/admin";
@@ -67,8 +68,9 @@ public class ServletUser extends HttpServlet {
                 redirect= "/views/crear-view.jsp";
                 break;
             case "/user/registrar-instructores":
-                redirect="/views/registrar-instructores";
+                redirect="/views/registrar-instructores.jsp";
                 break;
+
 
         }
         req.getRequestDispatcher(redirect)

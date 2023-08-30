@@ -25,7 +25,7 @@
                         <a class="nav-link" href="/user/registrar-instructores">Registrar instructores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/views/registrar-clases.jsp">Registrra clases</a>
+                        <a class="nav-link" href="/user/registrar-clases">Registrra clases</a>
                     </li>
                     <li>
                         <form action="/api/auth/logout">
