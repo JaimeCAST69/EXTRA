@@ -124,4 +124,32 @@ public class DaoUser implements DaoRepository<User> {
     public boolean delete(Long id) {
         return false;
     }
+
+    public List<User> findinstructores() {
+        List<User> instructores = new ArrayList<>();
+        try {
+            conn = new MySQLConnection().connect();
+            String query = "SELECT id, usuario, password,rol, estado,nombre,apellido_paterno,apellido_materno,curp,fecha_nacimiento from users"+
+                    "WHERE role='INSTRUCTOR_ROLE';";
+            pstm = conn.prepareStatement(query);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                User instructors = new User();
+                instructors.setId(rs.getLong("id"));
+                instructors.setUsuario(rs.getString("usuario"));
+                instructors.setPassword("password");
+                instructors.setRol(rs.getString("rol"));
+                instructors.setEstado(rs.getString("estado"));
+                instructors.setNombre(rs.getString("nombre"));
+                instructors.setApellido_paterno(rs.getString("apellido paterno"));
+                instructors.setApellido_materno(rs.getString("apellido_materno"));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, "Error findInstructors: " + e.getMessage());
+        } finally {
+            close();
+        }
+        return instructores;
+    }
 }

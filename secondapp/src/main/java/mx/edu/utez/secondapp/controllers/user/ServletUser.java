@@ -13,6 +13,7 @@ import mx.edu.utez.secondapp.models.User;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 
 @WebServlet(name = "ServletUser",
@@ -43,6 +44,8 @@ public class ServletUser extends HttpServlet {
                 redirect = "/index.jsp";
                 break;
             case "/user/admin":
+                List<User> instructores = new DaoUser().findinstructores();
+                req.setAttribute("instructores", instructores);
                 redirect = "/views/admin-view.jsp";
                 break;
             case "/user/instructor":
